@@ -1,14 +1,15 @@
 import { DataTypes } from "sequelize";
-const sequelize = require('./index');
+import sequelize from "../config/sequelize";
 
-const Product = sequelize.define('Product', {
+
+const Product = sequelize.define("Product", {
     title : {
         type: DataTypes.STRING,
-        allowNUll: false
+        allowNull: false
     },
     price : {
         type: DataTypes.FLOAT,
-        allowNUll: false
+        allowNull: false
     },
     description : {
         type: DataTypes.TEXT
@@ -25,10 +26,15 @@ const Product = sequelize.define('Product', {
     rating_count: {
         type: DataTypes.INTEGER
     },
+    is_deleted: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+    }
 },
      {
-      timestamps: true
+        tableName: "Product",
+        timestamps: true
     }
 );
 
-module.exports = Product;
+export default Product;
