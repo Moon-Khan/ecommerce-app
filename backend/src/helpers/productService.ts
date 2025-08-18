@@ -9,7 +9,7 @@ class ProductService{
             let data = await Product.findAll();
 
             if (data){
-                return {success:true, data: data}
+                return {success:true, data}
             }
             
         } catch(error){
@@ -25,7 +25,7 @@ class ProductService{
             let data = await Product.findByPk(productID)
 
             if (data){
-                return {success: true, data: data}
+                return {success: true, data}
             }
         } catch(error){
             console.log ("getProductsById  ERROR in ProductService", error)
@@ -36,7 +36,7 @@ class ProductService{
     async addProduct (body: any){
         try{
             let data = Product.create(body);
-            return {success: true, data: data}
+            return {success: true, data}
             
         } catch(error){
             console.log ("addProduct  ERROR in ProductService", error)
@@ -52,7 +52,7 @@ class ProductService{
                 return { success: false, data: null}
             }
 
-            return { success: true, data: data}
+            return { success: true, data}
 
         } catch(error){
             console.log ("updateProduct  ERROR in ProductService", error)
