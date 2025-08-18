@@ -1,16 +1,36 @@
 import { useEffect, useState } from "react"
 import ProdItem from "./productItem"
+import { getAllProduct } from "../api/productService"
 
 function ProductList ({searchQuery}){
 
     const [productData, setProductData] = useState([])
 
-    useEffect( ()=>{
-        fetch(`https://fakestoreapi.com/products`).then(res=> res.json()).then(data => setProductData(data))
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
+
+    useEffect(()=>{
+
+        if (productData.length === 0){
+
+            setLoading(true);
+            getAllProduct().then((res)=>{
+
+                setProductData(res.data);
+                setLoading(false)
+            }).catch((error)=>{
+                setError(error);
+                setLoading(false)
+            })
+        }
 
     }, [])
 
-    const filterProds = productData.filter(prod=>(
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error: {error}</p>;
+
+
+    const filterProds = productData.filter((prod)=>(
         prod.title && prod.title.toLowerCase().includes(searchQuery.toLowerCase())
     ))
 
