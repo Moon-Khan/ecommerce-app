@@ -34,8 +34,8 @@ function ProdCard({ prod }) {
             <h4 className="prod-title">{prod.title}</h4>
             <p className="prod-price">${prod.price}</p>
             <p className="prod-desc">{prod.description}</p>
-            <span className="prod-rate">⭐ {prod.rating.rate}</span> 
-            <span className="prod-count">👥 {prod.rating.count}</span>
+            <span className="prod-rate">⭐ {prod.rating_rate}</span> 
+            <span className="prod-count">👥 {prod.rating_count}</span>
             <button onClick={(e) =>{e.stopPropagation(); setLike(like+1)} }>Likes: {like}</button>
 
             {isInCart ?
