@@ -9,7 +9,8 @@ class ProductController extends BaseController{
     async getAllProducts (req: Request, res: Response){
 
         try{
-            const result = await ProductService.getAllProducts();
+            const query = req.query;
+            const result = await ProductService.getAllProducts(query);
 
             if (result?.success){
                 this.success(req, res, this.status.HTTP_OK, result?.data, "success" )
