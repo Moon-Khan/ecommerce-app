@@ -1,15 +1,23 @@
 import { where } from 'sequelize';
 import Product from '../models/product'; // adjust path
+import { getPagination, formatPaginationResponse } from "../utils/pagination"
 
 class ProductService{
 
-    async getAllProducts (){
+    async getAllProducts (query:any){
 
         try {
-            let data = await Product.findAll();
+
+            let {page, limit, offset, order} = getPagination(query);
+
+            const data = await Product.findAndCountAll({
+                limit,
+                offset,
+                order,
+              });            
 
             if (data){
-                return {success:true, data}
+                return { success: true, data:formatPaginationResponse(data, page, limit) }
             }
             
         } catch(error){
