@@ -1,10 +1,12 @@
 import API_BASE_URL from "./config";
 
-export async function getAllProduct() {
+export async function getAllProduct(params = {}) {
     try{
 
         console.log("IN GET PRODUCT")
-        const res = await fetch(`${API_BASE_URL}products/`)
+        const query = new URLSearchParams(params).toString();
+
+        const res = await fetch(`${API_BASE_URL}products/?${query}`)
         console.log("res", res)
 
         if (!res.ok){
